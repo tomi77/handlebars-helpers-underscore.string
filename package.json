@@ -1,0 +1,40 @@
+{
+  "name": "handlebars-helpers-underscore.string",
+  "version": "0.1.0",
+  "description": "Wrap underscore.string functions to Handlebars helpers",
+  "main": "dist/handlebars-helpers-underscore.string.js",
+  "scripts": {
+    "test": "jasmine-node --coffee spec/",
+    "coveralls": "istanbul cover jasmine-node --captureExceptions spec/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomi77/handlebars-helpers-underscore.string.git"
+  },
+  "keywords": [
+    "handlebars",
+    "helpers",
+    "underscore.string"
+  ],
+  "author": "Tomasz Rup",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/tomi77/handlebars-helpers-underscore.string/issues"
+  },
+  "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
+  "dependencies": {
+    "handlebars": "~1.3.0",
+    "underscore.string": "~2.3.3"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "istanbul": "^0.3.0",
+    "coveralls": "^2.11.1",
+    "coffee-script": "^1.8.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-coffee": "^0.11.1",
+    "grunt-contrib-clean": "^0.6.0"
+  }
+}

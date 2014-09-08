@@ -1,0 +1,21 @@
+{
+    "nonew": true,
+    "curly": true,
+    "noarg": true,
+    "forin": true,
+    "noempty": true,
+    "eqeqeq": true,
+    "strict": true,
+    "undef": true,
+    "bitwise": true,
+    "browser": true,
+    "plusplus": false,
+    "globals": {
+        "require": true,
+        "define": true,
+        "module": true,
+        "describe": true,
+        "it": true,
+        "expect": true
+    }
+}
