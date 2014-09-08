@@ -455,7 +455,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
   it 'should parse string to number', () ->
     template = Handlebars.compile '{{to_number str dec}}'
 
-    expect(template str: 'not a number').toBe ''
+    expect(template str: 'not a number').toBe 'NaN'
     expect(template str: 0).toBe '0'
     expect(template str: '0').toBe '0'
     expect(template str: '0.0').toBe '0'
