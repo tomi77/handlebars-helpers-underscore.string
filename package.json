@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
-    "istanbul": "^0.3.0",
+    "istanbul": "^0.3.2",
     "coveralls": "^2.11.1",
     "coffee-script": "^1.8.0",
     "grunt": "^0.4.5",
