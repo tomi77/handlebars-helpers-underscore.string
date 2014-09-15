@@ -1,19 +1,15 @@
-(function (root, factory) {
-'use strict';
 
-if (typeof define === 'function' && define.amd) {
-    // AMD
-    define(['handlebars', 'underscore.string'], factory);
-} else if (typeof exports === 'object') {
-    // Node, CommonJS-like
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(["handlebars","underscore.string"], factory);
+  } else if (typeof exports === 'object') {
     module.exports = factory(require('handlebars'), require('underscore.string'));
-} else {
-    // Browser globals (root is window)
-    root.returnExports = factory(root.Handlebars, root._s);
-}
-}(this, function (Handlebars, _s) {
-'use strict';
+  } else {
+    root.HandlebarsHelpers.UnderscoreString = factory(root.Handlebars, root._s);
+  }
+}(this, function(Handlebars, _s) {
 
+'use strict';
 var __slice = [].slice;
 
 Handlebars.registerHelper('is_blank', function(str) {
@@ -367,5 +363,7 @@ Handlebars.registerHelper('to_boolean', function(str, trueValues, falseValues) {
   options = args.pop();
   return _s.toBoolean.apply(null, args);
 });
+
+return Handlebars;
 
 }));
