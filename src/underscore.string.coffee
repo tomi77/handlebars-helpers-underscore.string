@@ -1,3 +1,5 @@
+'use strict'
+
 Handlebars.registerHelper 'is_blank', (str) ->
   args = Array.prototype.slice.call arguments
   options = args.pop()
