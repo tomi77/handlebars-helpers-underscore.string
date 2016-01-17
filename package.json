@@ -17,19 +17,19 @@
     "helpers",
     "underscore.string"
   ],
-  "author": "Tomasz Rup",
+  "author": "Tomasz Jakub Rup",
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/tomi77/handlebars-helpers-underscore.string/issues"
   },
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
-    "handlebars": "~2.0.0",
-    "underscore.string": "~2.3.3"
+    "handlebars": ">=2.0.0",
+    "underscore.string": ">=3.2.0"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
-    "istanbul": "^0.3.2",
+    "istanbul": "^0.4.2",
     "coveralls": "^2.11.1",
     "coffee-script": "^1.8.0",
     "gulp": "^3.8.8",
