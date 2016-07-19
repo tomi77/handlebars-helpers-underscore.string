@@ -1,17 +1,11 @@
 {
   "name": "handlebars-helpers-underscore.string",
-  "version": "0.1.0",
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "authors": [
     "Tomasz Rup <tomasz.rup@gmail.com>"
   ],
   "description": "Wrap underscore.string functions to Handlebars helpers",
   "main": "dist/handlebars-helpers-underscore.string.min.js",
-  "moduleType": [
-    "amd",
-    "globals",
-    "node"
-  ],
   "keywords": [
     "handlebars",
     "underscore.string",
@@ -21,10 +15,7 @@
   "ignore": [
     "node_modules",
     "bower_components",
-    ".jshint",
-    ".gitignore",
-    ".travis.yml",
-    "Gruntfile.coffee",
+    ".*",
     "src",
     "spec"
   ],
