@@ -17,7 +17,7 @@
     "underscore.string",
     "helpers"
   ],
-  "license": "BSD",
+  "license": "MIT",
   "ignore": [
     "node_modules",
     "bower_components",

@@ -18,7 +18,7 @@
     "underscore.string"
   ],
   "author": "Tomasz Jakub Rup",
-  "license": "BSD",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tomi77/handlebars-helpers-underscore.string/issues"
   },
