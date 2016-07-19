@@ -5,7 +5,7 @@ vm = require 'vm'
 path = require 'path'
 CoffeeScript = require 'coffee-script'
 
-helper = fs.readFileSync path.join __dirname, '/../src/underscore.string.coffee'
+helper = fs.readFileSync path.join __dirname, '/../src/handlebars-helpers-underscore.string.coffee'
 script = vm.createScript CoffeeScript.compile helper.toString()
 context =
   Handlebars: Handlebars
