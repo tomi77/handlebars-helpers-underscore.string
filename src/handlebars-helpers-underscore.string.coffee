@@ -1,9 +1,9 @@
 ###
-  Backbone-Forms Bootstrap TypeAhead editor 1.0.0
+  Handlebars helpers underscore.string 1.0.0
 
-  Copyright (c) 2016 Tomasz Jakub Rup
+  Copyright (c) 2014-2016 Tomasz Jakub Rup
 
-  https://github.com/tomi77/backbone-forms-typeahead
+  https://github.com/tomi77/handlebars-helpers-underscore.string
 
   Released under the MIT license
 ###
