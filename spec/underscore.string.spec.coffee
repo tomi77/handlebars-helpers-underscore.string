@@ -3,7 +3,6 @@ Handlebars = require 'handlebars'
 require '../src/handlebars-helpers-underscore.string'
 
 describe 'A Handlebars helpers underscore.string wrapper have function that', () ->
-  'use strict'
 
   it 'should trims defined characters from beginning and ending of the string', () ->
     template = Handlebars.compile '{{trim str characters}}'
