@@ -1,7 +1,4 @@
 Handlebars = require 'handlebars'
-fs = require 'fs'
-vm = require 'vm'
-path = require 'path'
 
 require '../src/handlebars-helpers-underscore.string'
 
