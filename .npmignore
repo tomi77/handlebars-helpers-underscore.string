@@ -1,0 +1,13 @@
+node_modules
+bower_components
+coverage
+
+*.log
+
+# Idea IDE
+.idea
+
+src
+spec
+.*
+bower.json
