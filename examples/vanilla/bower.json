@@ -1,0 +1,6 @@
+{
+  "name": "test",
+  "dependencies": {
+    "handlebars-helpers-underscore.string": "../../dist/handlebars-helpers-underscore.string.js"
+  }
+}
