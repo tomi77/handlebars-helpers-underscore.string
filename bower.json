@@ -5,7 +5,7 @@
     "Tomasz Rup <tomasz.rup@gmail.com>"
   ],
   "description": "Wrap underscore.string functions to Handlebars helpers",
-  "main": "dist/handlebars-helpers-underscore.string.min.js",
+  "main": "dist/handlebars-helpers-underscore.string.js",
   "keywords": [
     "handlebars",
     "underscore.string",
