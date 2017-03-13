@@ -19,7 +19,7 @@ var slice = [].slice;
       factory(require('handlebars'), require('underscore.string'));
       break;
     default:
-      factory(root.Handlebars, root._s);
+      factory(root.Handlebars, root._.str);
   }
 })(this, function(Handlebars, _s) {
   Handlebars.registerHelper('is_blank', function(str) {

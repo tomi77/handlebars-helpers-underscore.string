@@ -15,7 +15,7 @@
     when typeof exports is 'object'
       factory require('handlebars'), require('underscore.string')
     else
-      factory root.Handlebars, root._s
+      factory root.Handlebars, root._.str
   return
 ) @, (Handlebars, _s) ->
   Handlebars.registerHelper 'is_blank', (str) ->
