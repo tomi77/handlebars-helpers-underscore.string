@@ -1,6 +1,8 @@
 {
   "name": "test",
   "dependencies": {
-    "handlebars-helpers-underscore.string": "../../dist/handlebars-helpers-underscore.string.js"
+    "handlebars": ">=2.0.0",
+    "handlebars-helpers-underscore.string": "../../dist/handlebars-helpers-underscore.string.js",
+    "underscore.string": "~2.3.3"
   }
 }
