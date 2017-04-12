@@ -566,8 +566,8 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
   it 'should transform text into a URL slug', () ->
     template = Handlebars.compile '{{slugify str}}'
 
-    expect(template str: 'Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/').toBe 'jack-jill-like-numbers-1-2-3-and-4-and-silly-characters'
-    expect(template str: 'Un éléphant à l\'orée du bois').toBe 'un-elephant-a-l-oree-du-bois'
+    expect(template str: 'Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/').toBe 'jack-jill-like-numbers-123-and-4-and-silly-characters'
+    expect(template str: 'Un éléphant à l\'orée du bois').toBe 'un-elephant-a-loree-du-bois'
     expect(template str: 'I know latin characters: á í ó ú ç ã õ ñ ü ă ș ț').toBe 'i-know-latin-characters-a-i-o-u-c-a-o-n-u-a-s-t'
     expect(template str: 'I am a word too, even though I am but a single letter: i!').toBe 'i-am-a-word-too-even-though-i-am-but-a-single-letter-i'
     expect(template str: '').toBe ''

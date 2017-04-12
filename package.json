@@ -1,6 +1,6 @@
 {
   "name": "handlebars-helpers-underscore.string",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wrap underscore.string functions to Handlebars helpers",
   "main": "dist/handlebars-helpers-underscore.string.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
     "handlebars": ">=2.0.0",
-    "underscore.string": ">=3.2.0"
+    "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
