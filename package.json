@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
-    "handlebars": ">=2.0.0",
+    "handlebars": ">=4.0.0",
     "underscore.string": "~2.3.3"
   },
   "devDependencies": {
