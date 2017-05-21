@@ -1,6 +1,6 @@
 {
   "name": "handlebars-helpers-underscore.string",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Wrap underscore.string functions to Handlebars helpers",
   "main": "dist/handlebars-helpers-underscore.string.js",
   "scripts": {
