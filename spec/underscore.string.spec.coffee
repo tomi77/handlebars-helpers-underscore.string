@@ -15,9 +15,9 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: '    foo     ', characters: ' ').toBe 'foo'
     expect(template str: '\t    foo \t  ', characters: /\s/).toBe 'foo'
 
-    expect(template str: 'ffoo', characters: 'f').toBe 'oo'
-    expect(template str: 'ooff', characters: 'f').toBe 'oo'
-    expect(template str: 'ffooff', characters: 'f').toBe 'oo'
+    expect(template str: 'ffoo', characters: 'ff').toBe 'oo'
+    expect(template str: 'ooff', characters: 'ff').toBe 'oo'
+    expect(template str: 'ffooff', characters: 'ff').toBe 'oo'
 
     expect(template str: '_-foobar-_', characters: '_-').toBe 'foobar'
 
@@ -36,6 +36,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str1: 'Godfather', str2: 'Godfather').toBe '0'
     expect(template str1: 'Godfather', str2: 'Godfathe').toBe '1'
     expect(template str1: 'Godfather', str2: 'odfather').toBe '1'
+    expect(template str1: 'Godfather', str2: 'godfather').toBe '1'
     expect(template str1: 'Godfather', str2: 'Gdfthr').toBe '3'
     expect(template str1: 'seven', str2: 'eight').toBe '5'
     expect(template str1: '123', str2: 123).toBe '0'
@@ -43,6 +44,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str1: 'lol', str2: null).toBe '3'
     expect(template str1: null, str2: 'lol').toBe '3'
     expect(template str1: undefined, str2: 'lol').toBe '3'
+    expect(template str1: '因為我是中國人所以我會說中文', str2: '因為我是英國人所以我會說英文').toBe '2'
 
   it 'should trims defined characters from beginning of the string', () ->
     template = Handlebars.compile '{{ltrim str characters}}'
@@ -85,9 +87,35 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
 
   it 'should converts first letter of the string to uppercase', () ->
     template = Handlebars.compile '{{capitalize str}}'
+    template2 = Handlebars.compile '{{capitalize str lowercaseRest}}'
 
     expect(template str: 'fabio').toBe 'Fabio'
     expect(template str: 'FOO').toBe 'FOO'
+    expect(template2 str: 'FOO', lowercaseRest: no).toBe 'FOO'
+    expect(template2 str: 'foO', lowercaseRest: no).toBe 'FoO'
+    expect(template2 str: 'FOO', lowercaseRest: yes).toBe 'Foo'
+    expect(template2 str: 'foO', lowercaseRest: yes).toBe 'Foo'
+    expect(template2 str: 'f', lowercaseRest: no).toBe 'F'
+    expect(template2 str: 'f', lowercaseRest: yes).toBe 'F'
+    expect(template str: 'f').toBe 'F'
+    expect(template str: 123).toBe '123'
+    expect(template2 str: 123, lowercaseRest: yes).toBe '123'
+    expect(template2 str: 123, lowercaseRest: no).toBe '123'
+    expect(template str: '').toBe ''
+    expect(template str: null).toBe ''
+    expect(template str: undefined).toBe ''
+    expect(template2 str: '', lowercaseRest: yes).toBe ''
+    expect(template2 str: null, lowercaseRest: yes).toBe ''
+    expect(template2 str: undefined, lowercaseRest: yes).toBe ''
+    expect(template2 str: '', lowercaseRest: no).toBe ''
+    expect(template2 str: null, lowercaseRest: no).toBe ''
+    expect(template2 str: undefined, lowercaseRest: no).toBe ''
+
+  it 'should converts first letter of the string to lowercase', () ->
+    template = Handlebars.compile '{{decapitalize str}}'
+
+    expect(template str: 'Fabio').toBe 'fabio'
+    expect(template str: 'FOO').toBe 'fOO'
     expect(template str: 123).toBe '123'
     expect(template str: '').toBe ''
     expect(template str: null).toBe ''
@@ -104,6 +132,41 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template2 separator: 1, str1: 2, str2: 2).toBe '212'
     expect(template2 separator: '', str1: 'foo', str2: null).toBe 'foo'
     expect(template2 separator: null, str1: 'foo', str2: 'bar').toBe 'foobar'
+    expect(template3 separator: 1, str1: 2, str2: 3, str3: 4).toBe '21314'
+    expect(template3 separator: '|', str1: 'foo', str2: 'bar', str3: 'baz').toBe 'foo|bar|baz'
+    expect(template3 separator: '', str1: 2, str2: 3, str3: null).toBe '23'
+    expect(template2 separator: null, str1: 2, str2: 3).toBe '23'
+
+  it 'should dedent unnecessary indentation or dedent by a pattern', () ->
+    template = Handlebars.compile '{{dedent str pattern}}'
+
+    expect(template str: 'Hello\nWorld').toBe 'Hello\nWorld'
+    expect(template str: 'Hello\t\nWorld').toBe 'Hello\t\nWorld'
+    expect(template str: 'Hello \nWorld').toBe 'Hello \nWorld'
+    expect(template str: 'Hello\n  World').toBe 'Hello\n  World'
+    expect(template str: '    Hello\n  World').toBe '  Hello\nWorld'
+    expect(template str: '  Hello\nWorld').toBe '  Hello\nWorld'
+    expect(template str: '  Hello World').toBe 'Hello World'
+    expect(template str: '  Hello\n  World').toBe 'Hello\nWorld'
+    expect(template str: '  Hello\n    World').toBe 'Hello\n  World'
+    expect(template str: '\t\tHello\tWorld').toBe 'Hello\tWorld'
+    expect(template str: '\t\tHello\n\t\tWorld').toBe 'Hello\nWorld'
+    expect(template str: 'Hello\n\t\tWorld').toBe 'Hello\n\t\tWorld'
+    expect(template str: '\t\tHello\n\t\t\t\tWorld').toBe 'Hello\n\t\tWorld'
+    expect(template str: '\t\tHello\r\n\t\t\t\tWorld').toBe 'Hello\r\n\t\tWorld'
+    expect(template str: '\t\tHello\r\n\r\n\t\t\t\tWorld').toBe 'Hello\r\n\r\n\t\tWorld'
+    expect(template str: '\t\tHello\n\n\n\n\t\t\t\tWorld').toBe 'Hello\n\n\n\n\t\tWorld'
+    expect(template str: '\t\t\tHello\n\t\tWorld', pattern: '\\t').toBe '\t\tHello\n\tWorld'
+    expect(template str: '    Hello\n    World', pattern: '  ').toBe '  Hello\n  World'
+    expect(template str: '    Hello\n    World', pattern: '').toBe '    Hello\n    World'
+    expect(template str: '\t\tHello\n\n\n\n\t\t\t\tWorld', pattern: '\\t').toBe '\tHello\n\n\n\n\t\t\tWorld'
+    expect(template str: 'Hello\n\t\tWorld', pattern: '\t').toBe 'Hello\n\t\tWorld'
+    expect(template str: 'Hello\n  World', pattern: ' ').toBe 'Hello\n  World'
+    expect(template str: '  Hello\nWorld', pattern: ' ').toBe '  Hello\nWorld'
+    expect(template str: 123).toBe '123'
+    expect(template str: '').toBe ''
+    expect(template str: null).toBe ''
+    expect(template str: undefined).toBe ''
 
   it 'should return reversed string', () ->
     template = Handlebars.compile '{{reverse str}}'
@@ -127,6 +190,19 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: null).toBe ''
     expect(template str: undefined).toBe ''
 
+  it 'should replace diacritic characters with closest ASCII equivalents', () ->
+    template = Handlebars.compile '{{{clean_diacritics str}}}'
+
+    expect(template str: 'ąàáäâãåæăćčĉęèéëêĝĥìíïîĵłľńňòóöőôõðøśșşšŝťțţŭùúüűûñÿýçżźž').toBe 'aaaaaaaaaccceeeeeghiiiijllnnoooooooossssstttuuuuuunyyczzz'
+    expect(template str: 'ä').toBe 'a'
+    expect(template str: 'Ä Ø').toBe 'A O'
+    expect(template str: '1 foo ääkkönen').toBe '1 foo aakkonen'
+    expect(template str: 'Äöö ÖÖ').toBe 'Aoo OO'
+    expect(template str: ' ä ').toBe ' a '
+    expect(template str: '- " , £ $ ä').toBe '- " , £ $ a'
+    expect(template str: 'ß').toBe 'ss'
+    expect(template str: 'Schuß').toBe 'Schuss'
+
   it 'should C like string formatting', () ->
     template = Handlebars.compile '{{sprintf format value}}'
 
@@ -147,19 +223,28 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
 
   it 'should checks whether string starts with starts', () ->
     template = Handlebars.compile '{{#if (starts_with str starts)}}true{{else}}false{{/if}}'
+    template2 = Handlebars.compile '{{#if (starts_with str starts position)}}true{{else}}false{{/if}}'
 
     expect(template str: 'foobar', starts: 'foo').toBe 'true'
     expect(template str: 'oobar', starts: 'foo').toBe 'false'
+    expect(template str: 'oobar', starts: 'o').toBe 'true'
     expect(template str: 12345, starts: 123).toBe 'true'
     expect(template str: 2345, starts: 123).toBe 'false'
     expect(template str: '', starts: '').toBe 'true'
     expect(template str: null, starts: '').toBe 'true'
     expect(template str: null, starts: 'foo').toBe 'false'
+    expect(template2 str: '-foobar', starts: 'foo', position: 1).toBe 'true'
+    expect(template2 str: 'foobar', starts: 'foo', position: 0).toBe 'true'
+    expect(template2 str: 'foobar', starts: 'foo', position: 1).toBe 'false'
+    expect(template str: 'Äpfel', starts: 'Ä').toBe 'true'
 
   it 'should checks whether string ends with ends', () ->
     template = Handlebars.compile '{{#if (ends_with str ends)}}true{{else}}false{{/if}}'
+    template2 = Handlebars.compile '{{#if (ends_with str ends position)}}true{{else}}false{{/if}}'
 
     expect(template str: 'foobar', ends: 'bar').toBe 'true'
+    expect(template str: 'foobarfoobar', ends: 'bar').toBe 'true'
+    expect(template str: 'foo', ends: 'o').toBe 'true'
     expect(template str: '00018-0000062.Plone.sdh264.1a7264e6912a91aa4a81b64dc5517df7b8875994.mp4', ends: 'mp4').toBe 'true'
     expect(template str: 'fooba', ends: 'bar').toBe 'false'
     expect(template str: 12345, ends: 45).toBe 'true'
@@ -167,6 +252,10 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: '', ends: '').toBe 'true'
     expect(template str: null, ends: '').toBe 'true'
     expect(template str: null, ends: 'foo').toBe 'false'
+    expect(template2 str: 'foobar?', ends: 'bar', position: 6).toBe 'true'
+    expect(template2 str: 12345, ends: 34, position: 4).toBe 'true'
+    expect(template2 str: 12345, ends: 45, position: 4).toBe 'false'
+    expect(template str: 'foobä', ends: 'ä').toBe 'true'
 
   it 'should tests if string contains a substring', () ->
     template = Handlebars.compile '{{#if (include str needle)}}true{{else}}false{{/if}}'
@@ -182,6 +271,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
   it 'should chop', () ->
     template = Handlebars.compile '{{#each (chop str step)}}{{this}}, {{/each}}'
 
+    expect(template str: null, step: 2).toBe ''
     expect(template str: 'whitespace', step: 2).toBe 'wh, it, es, pa, ce, '
     expect(template str: 'whitespace', step: 3).toBe 'whi, tes, pac, e, '
     expect(template str: 'whitespace').toBe 'whitespace, '
@@ -199,16 +289,24 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: undefined, substr: 'x').toBe '0'
     expect(template str: 12345, substr: 1).toBe '1'
     expect(template str: 11345, substr: 1).toBe '2'
+    expect(template str: 'Hello World', substr: '').toBe '0'
+    expect(template str: 'Hello World', substr: null).toBe '0'
+    expect(template str: 'Hello World', substr: undefined).toBe '0'
+    expect(template str: '', substr: '').toBe '0'
+    expect(template str: null, substr: null).toBe '0'
+    expect(template str: undefined, substr: undefined).toBe '0'
 
   it 'should insert', () ->
     template = Handlebars.compile '{{insert str idx substr}}'
 
     expect(template str: 'Hello ', idx: 6, substr: 'Jessy').toBe 'Hello Jessy'
+    expect(template str: 'Hello', idx: 0, substr: 'Jessy ').toBe 'Jessy Hello'
     expect(template str: 'Hello ', idx: 100, substr: 'Jessy').toBe 'Hello Jessy'
     expect(template str: '', idx: 100, substr: 'Jessy').toBe 'Jessy'
     expect(template str: null, idx: 100, substr: 'Jessy').toBe 'Jessy'
     expect(template str: undefined, idx: 100, substr: 'Jessy').toBe 'Jessy'
     expect(template str: 12345, idx: 6, substr: 'Jessy').toBe '12345Jessy'
+    expect(template str: 12345, idx: 3, substr: 'Jessy').toBe '123Jessy45'
 
   it 'should splice', () ->
     template = Handlebars.compile '{{splice str idx cnt substr}}'
@@ -223,6 +321,20 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 'A').toBe 'B'
     expect(template str: '+').toBe ','
     expect(template str: 1).toBe '2'
+    expect(template str: '').toBe ''
+    expect(template str: null).toBe ''
+    expect(template str: undefined).toBe ''
+
+  it 'should returns the predecessor to str', () ->
+    template = Handlebars.compile '{{pred str}}'
+
+    expect(template str: 'b').toBe 'a'
+    expect(template str: 'B').toBe 'A'
+    expect(template str: ',').toBe '+'
+    expect(template str: 2).toBe '1'
+    expect(template str: '').toBe ''
+    expect(template str: null).toBe ''
+    expect(template str: undefined).toBe ''
 
   it 'should titleize', () ->
     template = Handlebars.compile '{{{titleize str}}}'
@@ -239,17 +351,36 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
 
   it 'should converts underscored or dasherized string to a camelized one. Begins with a lower case letter unless it starts with an underscore or string', () ->
     template = Handlebars.compile '{{camelize str}}'
+    template2 = Handlebars.compile '{{camelize str decapitalize}}'
 
     expect(template str: 'the_camelize_string_method').toBe 'theCamelizeStringMethod'
+    expect(template str: 'webkit-transform').toBe 'webkitTransform'
     expect(template str: '-the-camelize-string-method').toBe 'TheCamelizeStringMethod'
+    expect(template str: '_the_camelize_string_method').toBe 'TheCamelizeStringMethod'
+    expect(template str: 'The-camelize-string-method').toBe 'TheCamelizeStringMethod'
     expect(template str: 'the camelize string method').toBe 'theCamelizeStringMethod'
     expect(template str: ' the camelize  string method').toBe 'theCamelizeStringMethod'
     expect(template str: 'the camelize   string method').toBe 'theCamelizeStringMethod'
+    expect(template str: ' with   spaces').toBe 'withSpaces'
+    expect(template str: '_som eWeird---name-').toBe 'SomEWeirdName'
     expect(template str: '').toBe ''
     expect(template str: null).toBe ''
     expect(template str: undefined).toBe ''
     expect(template str: 123).toBe '123'
-    expect(template str: '_som eWeird---name-').toBe 'SomEWeirdName'
+    expect(template2 str: 'the_camelize_string_method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: 'webkit-transform', decapitalize: true).toBe 'webkitTransform'
+    expect(template2 str: '-the-camelize-string-method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: '_the_camelize_string_method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: 'The-camelize-string-method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: 'the camelize string method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: ' the camelize  string method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: 'the camelize   string method', decapitalize: true).toBe 'theCamelizeStringMethod'
+    expect(template2 str: ' with   spaces', decapitalize: true).toBe 'withSpaces'
+    expect(template2 str: '_som eWeird---name-', decapitalize: true).toBe 'somEWeirdName'
+    expect(template2 str: '', decapitalize: true).toBe ''
+    expect(template2 str: null, decapitalize: true).toBe ''
+    expect(template2 str: undefined, decapitalize: true).toBe ''
+    expect(template2 str: 123, decapitalize: true).toBe '123'
 
   it 'should converts a camelized or dasherized string into an underscored one', () ->
     template = Handlebars.compile '{{underscored str}}'
@@ -276,6 +407,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 'the  dasherize string method  ').toBe 'the-dasherize-string-method'
     expect(template str: 'téléphone').toBe 'téléphone'
     expect(template str: 'foo$bar').toBe 'foo$bar'
+    expect(template str: 'input with a-dash').toBe 'input-with-a-dash'
     expect(template str: '').toBe ''
     expect(template str: null).toBe ''
     expect(template str: undefined).toBe ''
@@ -288,12 +420,19 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 'some_class_name').toBe 'SomeClassName'
     expect(template str: 'my wonderfull class_name').toBe 'MyWonderfullClassName'
     expect(template str: 'my wonderfull.class.name').toBe 'MyWonderfullClassName'
+    expect(template str: 'myLittleCamel').toBe 'MyLittleCamel'
+    expect(template str: 'myLittleCamel.class.name').toBe 'MyLittleCamelClassName'
+    expect(template str: 123).toBe '123'
+    expect(template str: '').toBe ''
+    expect(template str: null).toBe ''
+    expect(template str: undefined).toBe ''
 
   it 'should converts an underscored, camelized, or dasherized string into a humanized one. Also removes beginning and ending whitespace, and removes the postfix \'_id\'.', () ->
     template = Handlebars.compile '{{humanize str}}'
 
     expect(template str: 'the_humanize_string_method').toBe 'The humanize string method'
     expect(template str: 'ThehumanizeStringMethod').toBe 'Thehumanize string method'
+    expect(template str: '-ThehumanizeStringMethod').toBe 'Thehumanize string method'
     expect(template str: 'the humanize string method').toBe 'The humanize string method'
     expect(template str: 'the humanize_id string method_id').toBe 'The humanize id string method'
     expect(template str: 'the  humanize string method  ').toBe 'The humanize string method'
@@ -347,6 +486,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 0).toBe 'not blank'
     expect(template str: null).toBe 'blank'
     expect(template str: undefined).toBe 'blank'
+    expect(template str: false).toBe 'not blank'
 
   it 'should split string by delimiter', () ->
     template = Handlebars.compile '{{#each (words str delimiter)}}{{this}} {{/each}}'
@@ -384,11 +524,14 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     template = Handlebars.compile '{{#each (lines str)}}{{this}}<br/>{{/each}}'
 
     expect(template str: 'Hello\nWorld').toBe 'Hello<br/>World<br/>'
+    expect(template str: 'Hello\rWorld').toBe 'Hello<br/>World<br/>'
     expect(template str: 'Hello World').toBe 'Hello World<br/>'
+    expect(template str: '\r\n\n\r').toBe '<br/><br/><br/><br/>'
     expect(template str: 123).toBe '123<br/>'
     expect(template str: '').toBe '<br/>'
     expect(template str: null).toBe ''
     expect(template str: undefined).toBe ''
+    expect(template str: 'Hello\r\nWorld').toBe 'Hello<br/>World<br/>'
 
   it 'should pads the str with characters until the total string length is equal to the passed length parameter', () ->
     template = Handlebars.compile '{{pad str len padstr type}}'
@@ -445,9 +588,14 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     template = Handlebars.compile '{{to_number str dec}}'
 
     expect(template str: 'not a number').toBe 'NaN'
+    expect(template str: NaN).toBe 'NaN'
+    expect(template str: {}).toBe 'NaN'
+    expect(template str: [/a/]).toBe 'NaN'
+    expect(template str: 'alpha6').toBe 'NaN'
     expect(template str: 0).toBe '0'
     expect(template str: '0').toBe '0'
     expect(template str: '0.0').toBe '0'
+    expect(template str: '        0.0    ').toBe '0'
     expect(template str: '0.1').toBe '0'
     expect(template str: '0.1', dec: 1).toBe '0.1'
     expect(template str: '  0.1', dec: 1).toBe '0.1'
@@ -460,9 +608,19 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 2, dec: 2).toBe '2'
     expect(template str: -2).toBe '-2'
     expect(template str: '-2').toBe '-2'
+    expect(template str: '-2.5123', dec: 3).toBe '-2.512'
+    expect(template str: -234, dec: -1).toBe '-230'
+    expect(template str: 234, dec: -2).toBe '200'
+    expect(template str: '234', dec: -2).toBe '200'
     expect(template str: '').toBe '0'
     expect(template str: null).toBe '0'
     expect(template str: undefined).toBe '0'
+    expect(template str: Infinity).toBe 'Infinity'
+    expect(template str: Infinity, dec: Infinity).toBe 'Infinity'
+    expect(template str: 1, dec: Infinity).toBe '1'
+    expect(template str: -Infinity).toBe '-Infinity'
+    expect(template str: -Infinity, dec: -Infinity).toBe '-Infinity'
+    expect(template str: 1, dec: -Infinity).toBe '1'
 
   it 'should formats the numbers', () ->
     template = Handlebars.compile '{{number_format num dec dsep tsep}}'
@@ -473,6 +631,8 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template num: 90000, dec: 2).toBe '90,000.00'
     expect(template num: 1000.754).toBe '1,001'
     expect(template num: 1000.754, dec: 2).toBe '1,000.75'
+    expect(template num: 1000.755, dec: 2).toBe '1,000.75'
+    expect(template num: 1000.756, dec: 2).toBe '1,000.76'
     expect(template num: 1000.754, dec: 0, dsep: ',', tsep: '.').toBe '1.001'
     expect(template num: 1000.754, dec: 2, dsep: ',', tsep: '.').toBe '1.000,75'
     expect(template num: 1000000.754, dec: 2, dsep: ',', tsep: '.').toBe '1.000.000,75'
@@ -566,10 +726,12 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
   it 'should transform text into a URL slug', () ->
     template = Handlebars.compile '{{slugify str}}'
 
-    expect(template str: 'Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/').toBe 'jack-jill-like-numbers-123-and-4-and-silly-characters'
-    expect(template str: 'Un éléphant à l\'orée du bois').toBe 'un-elephant-a-loree-du-bois'
+    expect(template str: 'Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/').toBe 'jack-jill-like-numbers-1-2-3-and-4-and-silly-characters'
+    expect(template str: 'Un éléphant à l\'orée du bois').toBe 'un-elephant-a-l-oree-du-bois'
     expect(template str: 'I know latin characters: á í ó ú ç ã õ ñ ü ă ș ț').toBe 'i-know-latin-characters-a-i-o-u-c-a-o-n-u-a-s-t'
     expect(template str: 'I am a word too, even though I am but a single letter: i!').toBe 'i-am-a-word-too-even-though-i-am-but-a-single-letter-i'
+    expect(template str: 'Some asian 天地人 characters').toBe 'some-asian-characters'
+    expect(template str: 'SOME Capital Letters').toBe 'some-capital-letters'
     expect(template str: '').toBe ''
     expect(template str: null).toBe ''
     expect(template str: undefined).toBe ''
@@ -627,6 +789,7 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 'true').toBe 'true'
     expect(template str: 'the truth', true_vals: 'the truth', false_vals: 'this is falsy').toBe 'true'
     expect(template str: 'this is falsy', true_vals: 'the truth', false_vals: 'this is falsy').toBe 'false'
+    expect(template str: 'true').toBe 'true'
     expect(template str: 'trUe').toBe 'true'
     expect(template str: 'trUe', true_vals: /tru?/i).toBe 'true'
     #expect(template str: 'something else').toBe 'undefined'
@@ -642,3 +805,20 @@ describe 'A Handlebars helpers underscore.string wrapper have function that', ()
     expect(template str: 'foo true bar', true_vals: /true/).toBe 'true'
     expect(template str: 'foo FALSE bar', true_vals: null, false_vals: /FALSE/).toBe 'false'
     expect(template str: ' true  ').toBe 'true'
+
+  it 'Should replace all', () ->
+    template = Handlebars.compile '{{replace_all str find replace ignorecase}}'
+
+    expect(template str: 'a', find: 'a', replace: 'b').toBe 'b'
+    expect(template str: 'aa', find: 'a', replace: 'b').toBe 'bb'
+    expect(template str: 'aca', find: 'a', replace: 'b').toBe 'bcb'
+    expect(template str: 'ccc', find: 'a', replace: 'b').toBe 'ccc'
+    expect(template str: 'AAa', find: 'a', replace: 'b').toBe 'AAb'
+    expect(template str: 'Aa', find: 'a', replace: 'b', ignorecase: true).toBe 'bb'
+    expect(template str: 'foo bar foo', find: 'foo', replace: 'moo').toBe 'moo bar moo'
+    expect(template str: 'foo bar\n foo', find: 'foo', replace: 'moo').toBe 'moo bar\n moo'
+    expect(template str: 'foo bar FoO', find: 'foo', replace: 'moo', ignorecase: true).toBe 'moo bar moo'
+    expect(template str: '', find: 'a', replace: 'b').toBe ''
+    expect(template str: null, find: 'a', replace: 'b').toBe ''
+    expect(template str: undefined, find: 'a', replace: 'b').toBe ''
+    expect(template str: 12345, find: 'a', replace: 'b').toBe '12345'

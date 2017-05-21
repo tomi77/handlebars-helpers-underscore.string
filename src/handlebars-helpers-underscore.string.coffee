@@ -28,7 +28,7 @@
     args.pop()
     _s.stripTags.apply null, args
 
-  Handlebars.registerHelper 'capitalize', (str) ->
+  Handlebars.registerHelper 'capitalize', (str, lowercaseRest) ->
     args = Array::slice.call arguments
     args.pop()
     _s.capitalize.apply null, args
@@ -88,12 +88,12 @@
     args.pop()
     _s.reverse.apply null, args
 
-  Handlebars.registerHelper 'starts_with', (str, starts) ->
+  Handlebars.registerHelper 'starts_with', (str, starts, position) ->
     args = Array::slice.call arguments
     args.pop()
     _s.startsWith.apply null, args
 
-  Handlebars.registerHelper 'ends_with', (str, ends) ->
+  Handlebars.registerHelper 'ends_with', (str, ends, position) ->
     args = Array::slice.call arguments
     args.pop()
     _s.endsWith.apply null, args
@@ -108,7 +108,7 @@
     args.pop()
     _s.titleize.apply null, args
 
-  Handlebars.registerHelper 'camelize', (str) ->
+  Handlebars.registerHelper 'camelize', (str, decapitalize) ->
     args = Array::slice.call arguments
     args.pop()
     _s.camelize.apply null, args
@@ -267,5 +267,30 @@
     args = Array::slice.call arguments
     args.pop()
     _s.toBoolean.apply null, args
+
+  Handlebars.registerHelper 'clean_diacritics', (str) ->
+    args = Array::slice.call arguments
+    args.pop()
+    _s.cleanDiacritics.apply null, args
+
+  Handlebars.registerHelper 'decapitalize', (str) ->
+    args = Array::slice.call arguments
+    args.pop()
+    _s.decapitalize.apply null, args
+
+  Handlebars.registerHelper 'dedent', (str, pattern) ->
+    args = Array::slice.call arguments
+    args.pop()
+    _s.dedent.apply null, args
+
+  Handlebars.registerHelper 'pred', (str) ->
+    args = Array::slice.call arguments
+    args.pop()
+    _s.pred.apply null, args
+
+  Handlebars.registerHelper 'replace_all', (str, find, replace, ignorecase) ->
+    args = Array::slice.call arguments
+    args.pop()
+    _s.replaceAll.apply null, args
 
   return

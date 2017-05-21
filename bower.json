@@ -22,7 +22,7 @@
     "spec"
   ],
   "dependencies": {
-    "handlebars": ">=2.0.0",
-    "underscore.string": "~2.3.3"
+    "handlebars": ">=4.0.0",
+    "underscore.string": ">=3.3.0"
   }
 }

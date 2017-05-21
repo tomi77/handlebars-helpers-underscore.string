@@ -27,7 +27,7 @@
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
     "handlebars": ">=4.0.0",
-    "underscore.string": "~2.3.3"
+    "underscore.string": ">=3.3.0"
   },
   "devDependencies": {
     "coffee-script": "^1.12.5",

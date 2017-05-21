@@ -34,7 +34,7 @@ var slice = [].slice;
     args.pop();
     return _s.stripTags.apply(null, args);
   });
-  Handlebars.registerHelper('capitalize', function(str) {
+  Handlebars.registerHelper('capitalize', function(str, lowercaseRest) {
     var args;
     args = Array.prototype.slice.call(arguments);
     args.pop();
@@ -107,13 +107,13 @@ var slice = [].slice;
     args.pop();
     return _s.reverse.apply(null, args);
   });
-  Handlebars.registerHelper('starts_with', function(str, starts) {
+  Handlebars.registerHelper('starts_with', function(str, starts, position) {
     var args;
     args = Array.prototype.slice.call(arguments);
     args.pop();
     return _s.startsWith.apply(null, args);
   });
-  Handlebars.registerHelper('ends_with', function(str, ends) {
+  Handlebars.registerHelper('ends_with', function(str, ends, position) {
     var args;
     args = Array.prototype.slice.call(arguments);
     args.pop();
@@ -131,7 +131,7 @@ var slice = [].slice;
     args.pop();
     return _s.titleize.apply(null, args);
   });
-  Handlebars.registerHelper('camelize', function(str) {
+  Handlebars.registerHelper('camelize', function(str, decapitalize) {
     var args;
     args = Array.prototype.slice.call(arguments);
     args.pop();
@@ -323,5 +323,35 @@ var slice = [].slice;
     args = Array.prototype.slice.call(arguments);
     args.pop();
     return _s.toBoolean.apply(null, args);
+  });
+  Handlebars.registerHelper('clean_diacritics', function(str) {
+    var args;
+    args = Array.prototype.slice.call(arguments);
+    args.pop();
+    return _s.cleanDiacritics.apply(null, args);
+  });
+  Handlebars.registerHelper('decapitalize', function(str) {
+    var args;
+    args = Array.prototype.slice.call(arguments);
+    args.pop();
+    return _s.decapitalize.apply(null, args);
+  });
+  Handlebars.registerHelper('dedent', function(str, pattern) {
+    var args;
+    args = Array.prototype.slice.call(arguments);
+    args.pop();
+    return _s.dedent.apply(null, args);
+  });
+  Handlebars.registerHelper('pred', function(str) {
+    var args;
+    args = Array.prototype.slice.call(arguments);
+    args.pop();
+    return _s.pred.apply(null, args);
+  });
+  Handlebars.registerHelper('replace_all', function(str, find, replace, ignorecase) {
+    var args;
+    args = Array.prototype.slice.call(arguments);
+    args.pop();
+    return _s.replaceAll.apply(null, args);
   });
 });
