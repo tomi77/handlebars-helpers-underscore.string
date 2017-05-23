@@ -7,8 +7,8 @@
     "build": "npm run build-js; npm run uglify",
     "build-js": "coffee --bare --compile --no-header --output dist src/handlebars-helpers-underscore.string.coffee",
     "uglify": "uglifyjs dist/handlebars-helpers-underscore.string.js --output dist/handlebars-helpers-underscore.string.min.js --compress --mangle",
-    "test": "jasmine-node --coffee spec/",
-    "coveralls": "ibrik cover jasmine-node --default-excludes --files.include=\"src/*.coffee\" -- --coffee spec/ && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "test": "node --require coffee-script/register ./node_modules/.bin/jasmine --config=test/support/jasmine.json",
+    "coveralls": "ibrik cover jasmine --default-excludes --files.include=\"src/*.coffee\" -- --config=test/support/jasmine.json && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "coffee-script": "^1.12.5",
     "coveralls": "^2.13.1",
     "ibrik": "^2.0.0",
-    "jasmine-node": "^1.14.5",
+    "jasmine": "^2.6.0",
     "uglify-js": "^3.0.1"
   }
 }
