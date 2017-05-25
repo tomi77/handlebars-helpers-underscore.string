@@ -11,6 +11,8 @@
 var slice = [].slice;
 
 (function(root, factory) {
+
+  /* istanbul ignore next */
   switch (false) {
     case !(typeof define === 'function' && define.amd):
       define(['handlebars', 'underscore.string'], factory);

@@ -9,6 +9,7 @@
 ###
 
 ((root, factory) ->
+  ### istanbul ignore next ###
   switch
     when typeof define is 'function' and define.amd
       define ['handlebars', 'underscore.string'], factory
