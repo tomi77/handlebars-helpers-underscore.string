@@ -8,7 +8,7 @@
 handlebars-helpers-underscore.string
 ====================================
 
-Wrap underscore.string functions to Handlebars helpers
+Wrap [underscore.string](http://gabceb.github.io/underscore.string.site/) functions to [Handlebars](http://handlebarsjs.com/) helpers
 
 ## Installation
 
