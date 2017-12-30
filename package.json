@@ -28,6 +28,7 @@
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
     "handlebars": ">=4.0.0",
+    "sprintf-js": "^1.1.1",
     "underscore.string": ">=3.3.0"
   },
   "devDependencies": {

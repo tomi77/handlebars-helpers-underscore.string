@@ -15,15 +15,15 @@ var slice = [].slice;
   /* istanbul ignore next */
   switch (false) {
     case !(typeof define === 'function' && define.amd):
-      define(['handlebars', 'underscore.string'], factory);
+      define(['handlebars', 'underscore.string', 'sprintf'], factory);
       break;
     case typeof exports !== 'object':
-      factory(require('handlebars'), require('underscore.string'));
+      factory(require('handlebars'), require('underscore.string'), require('sprintf-js'));
       break;
     default:
-      factory(root.Handlebars, root._.str);
+      factory(root.Handlebars, root._.str, root);
   }
-})(this, function(Handlebars, _s) {
+})(this, function(Handlebars, _s, sprintf) {
   var func, helper, helpers;
   helpers = {
     camelize: _s.camelize,
@@ -60,7 +60,7 @@ var slice = [].slice;
     rtrim: _s.rtrim,
     slugify: _s.slugify,
     splice: _s.splice,
-    sprintf: _s.sprintf,
+    sprintf: sprintf.sprintf,
     starts_with: _s.startsWith,
     strip_tags: _s.stripTags,
     str_left: _s.strLeft,
@@ -79,7 +79,7 @@ var slice = [].slice;
     truncate: _s.truncate,
     underscored: _s.underscored,
     unquote: _s.unquote,
-    vsprintf: _s.vsprintf,
+    vsprintf: sprintf.vsprintf,
     words: _s.words
   };
   for (helper in helpers) {

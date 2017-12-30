@@ -12,13 +12,13 @@
   ### istanbul ignore next ###
   switch
     when typeof define is 'function' and define.amd
-      define ['handlebars', 'underscore.string'], factory
+      define ['handlebars', 'underscore.string', 'sprintf'], factory
     when typeof exports is 'object'
-      factory require('handlebars'), require('underscore.string')
+      factory require('handlebars'), require('underscore.string'), require('sprintf-js')
     else
-      factory root.Handlebars, root._.str
+      factory root.Handlebars, root._.str, root
   return
-) @, (Handlebars, _s) ->
+) @, (Handlebars, _s, sprintf) ->
   helpers =
     camelize: _s.camelize
     capitalize: _s.capitalize
@@ -54,7 +54,7 @@
     rtrim: _s.rtrim
     slugify: _s.slugify
     splice: _s.splice
-    sprintf: _s.sprintf
+    sprintf: sprintf.sprintf
     starts_with: _s.startsWith
     strip_tags: _s.stripTags
     str_left: _s.strLeft
@@ -73,7 +73,7 @@
     truncate: _s.truncate
     underscored: _s.underscored
     unquote: _s.unquote
-    vsprintf: _s.vsprintf
+    vsprintf: sprintf.vsprintf
     words: _s.words
 
   for helper, func of helpers
