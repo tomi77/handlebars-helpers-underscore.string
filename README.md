@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/tomi77/handlebars-helpers-underscore.string.png)](https://travis-ci.org/tomi77/handlebars-helpers-underscore.string)
 [![Coverage Status](https://img.shields.io/coveralls/tomi77/handlebars-helpers-underscore.string.svg)](https://coveralls.io/r/tomi77/handlebars-helpers-underscore.string)
 [![Code Climate](https://codeclimate.com/github/tomi77/handlebars-helpers-underscore.string/badges/gpa.svg)](https://codeclimate.com/github/tomi77/handlebars-helpers-underscore.string)
-[![Dependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string.png)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string)
-[![devDependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string/dev-status.png)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string#info=devDependencies)
-[![peerDependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string/peer-status.png)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string#info=peerDependencies)
+[![Dependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string.svg)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string)
+[![devDependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string/dev-status.svg)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string?type=dev)
+[![peerDependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string/peer-status.svg)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string?type=peer)
 ![Downloads](https://img.shields.io/npm/dt/handlebars-helpers-underscore.string.svg)
 
 handlebars-helpers-underscore.string
