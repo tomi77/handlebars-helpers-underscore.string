@@ -3,6 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/tomi77/handlebars-helpers-underscore.string/badges/gpa.svg)](https://codeclimate.com/github/tomi77/handlebars-helpers-underscore.string)
 [![Dependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string.png)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string)
 [![devDependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string/dev-status.png)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string#info=devDependencies)
+[![peerDependency Status](https://david-dm.org/tomi77/handlebars-helpers-underscore.string/peer-status.png)](https://david-dm.org/tomi77/handlebars-helpers-underscore.string#info=peerDependencies)
 ![Downloads](https://img.shields.io/npm/dt/handlebars-helpers-underscore.string.svg)
 
 handlebars-helpers-underscore.string

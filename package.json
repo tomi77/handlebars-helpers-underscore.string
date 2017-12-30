@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
-    "handlebars": ">=4.0.0",
     "sprintf-js": "^1.1.1",
     "underscore.string": ">=3.3.0"
   },
@@ -38,5 +37,8 @@
     "istanbul": "^0.4.5",
     "jasmine": "^2.6.0",
     "uglify-js": "^3.0.1"
+  },
+  "peerDependencies": {
+    "handlebars": ">=4.0.0"
   }
 }
