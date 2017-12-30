@@ -1,6 +1,6 @@
 
 /*
-  Handlebars helpers underscore.string 1.0.2
+  Handlebars helpers underscore.string 1.1.0
 
   Copyright (c) 2014-2017 Tomasz Jakub Rup
 
