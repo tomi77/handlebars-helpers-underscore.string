@@ -7,7 +7,7 @@
     "build": "npm run build-js; npm run uglify",
     "build-js": "coffee --bare --compile --no-header --output dist src/handlebars-helpers-underscore.string.coffee",
     "uglify": "uglifyjs dist/handlebars-helpers-underscore.string.js --output dist/handlebars-helpers-underscore.string.min.js --compress --mangle",
-    "test": "node --require coffee-script/register --require coffee-coverage/register-istanbul ./node_modules/.bin/jasmine --config=test/support/jasmine.json",
+    "test": "node --require coffee-script/register --require coffee-coverage/register-istanbul ./node_modules/.bin/jasmine",
     "coverage": "npm test; istanbul report",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },
