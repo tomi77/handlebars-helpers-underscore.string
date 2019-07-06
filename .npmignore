@@ -8,7 +8,6 @@ coverage
 .idea
 
 examples
-src
 spec
 .*
 bower.json

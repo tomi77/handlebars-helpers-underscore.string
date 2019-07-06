@@ -4,11 +4,10 @@
   "description": "Wrap underscore.string functions to Handlebars helpers",
   "main": "dist/handlebars-helpers-underscore.string.js",
   "scripts": {
-    "build": "npm run build-js; npm run uglify",
-    "build-js": "coffee --bare --compile --no-header --output dist src/handlebars-helpers-underscore.string.coffee",
+    "build": "npm run uglify",
     "uglify": "uglifyjs dist/handlebars-helpers-underscore.string.js --output dist/handlebars-helpers-underscore.string.min.js --compress --mangle",
-    "test": "node --require coffee-script/register --require coffee-coverage/register-istanbul ./node_modules/.bin/jasmine",
-    "coverage": "npm test; istanbul report",
+    "test": "jasmine",
+    "coverage": "istanbul cover jasmine; istanbul report",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
@@ -31,8 +30,6 @@
     "underscore.string": ">=3.3.0"
   },
   "devDependencies": {
-    "coffee-coverage": "^3.0.0",
-    "coffee-script": "1.12.5",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
     "jasmine": "^2.6.0",

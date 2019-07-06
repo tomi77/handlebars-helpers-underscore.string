@@ -18,7 +18,6 @@
     "bower_components",
     "examples",
     ".*",
-    "src",
     "spec"
   ],
   "dependencies": {

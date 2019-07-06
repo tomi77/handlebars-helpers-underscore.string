@@ -1,11 +1,9 @@
 engines:
-  coffeelint:
-    enabled: true
   fixme:
     enabled: true
 
 ratings:
   paths:
-  - "src/*.coffee"
+  - "dist/handlebars-helpers-underscore.string.js"
 
 exclude_paths: []

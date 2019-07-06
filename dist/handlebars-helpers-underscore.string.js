@@ -10,20 +10,15 @@
  */
 var slice = [].slice;
 
-(function(root, factory) {
+(function(factory) {
 
   /* istanbul ignore next */
-  switch (false) {
-    case !(typeof define === 'function' && define.amd):
-      define(['handlebars', 'underscore.string', 'sprintf'], factory);
-      break;
-    case typeof exports !== 'object':
-      factory(require('handlebars'), require('underscore.string'), require('sprintf-js'));
-      break;
-    default:
-      factory(root.Handlebars, root._.str, root);
+  if (typeof define === 'function' && define.amd) {
+    define(['handlebars', 'underscore.string', 'sprintf'], factory);
+  } else if (typeof exports === 'object') {
+    factory(require('handlebars'), require('underscore.string'), require('sprintf-js'));
   }
-})(this, function(Handlebars, _s, sprintf) {
+})(function(Handlebars, _s, sprintf) {
   var func, helper, helpers;
   helpers = {
     camelize: _s.camelize,
