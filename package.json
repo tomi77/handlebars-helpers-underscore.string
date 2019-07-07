@@ -4,7 +4,6 @@
   "description": "Wrap underscore.string functions to Handlebars helpers",
   "main": "dist/handlebars-helpers-underscore.string.js",
   "scripts": {
-    "build": "npm run uglify",
     "test": "jasmine",
     "coverage": "istanbul cover jasmine; istanbul report",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
@@ -25,7 +24,6 @@
   },
   "homepage": "https://github.com/tomi77/handlebars-helpers-underscore.string",
   "dependencies": {
-    "sprintf-js": "^1.1.1",
     "underscore.string": ">=3.3.0"
   },
   "devDependencies": {

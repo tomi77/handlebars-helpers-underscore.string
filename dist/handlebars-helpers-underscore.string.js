@@ -14,11 +14,11 @@ var slice = [].slice;
 
   /* istanbul ignore next */
   if (typeof define === 'function' && define.amd) {
-    define(['handlebars', 'underscore.string', 'sprintf'], factory);
+    define(['handlebars', 'underscore.string'], factory);
   } else if (typeof exports === 'object') {
-    factory(require('handlebars'), require('underscore.string'), require('sprintf-js'));
+    factory(require('handlebars'), require('underscore.string'));
   }
-})(function(Handlebars, _s, sprintf) {
+})(function(Handlebars, _s) {
   var func, helper, helpers;
   helpers = {
     camelize: _s.camelize,
@@ -55,7 +55,6 @@ var slice = [].slice;
     rtrim: _s.rtrim,
     slugify: _s.slugify,
     splice: _s.splice,
-    sprintf: sprintf.sprintf,
     starts_with: _s.startsWith,
     strip_tags: _s.stripTags,
     str_left: _s.strLeft,
@@ -74,7 +73,6 @@ var slice = [].slice;
     truncate: _s.truncate,
     underscored: _s.underscored,
     unquote: _s.unquote,
-    vsprintf: sprintf.vsprintf,
     words: _s.words
   };
   for (helper in helpers) {
