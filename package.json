@@ -5,7 +5,6 @@
   "main": "dist/handlebars-helpers-underscore.string.js",
   "scripts": {
     "build": "npm run uglify",
-    "uglify": "uglifyjs dist/handlebars-helpers-underscore.string.js --output dist/handlebars-helpers-underscore.string.min.js --compress --mangle",
     "test": "jasmine",
     "coverage": "istanbul cover jasmine; istanbul report",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
@@ -32,8 +31,7 @@
   "devDependencies": {
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
-    "jasmine": "^3.4.0",
-    "uglify-js": "^3.0.1"
+    "jasmine": "^3.4.0"
   },
   "peerDependencies": {
     "handlebars": ">=4.0.0"

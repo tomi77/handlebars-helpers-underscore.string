@@ -7,7 +7,6 @@ instrumentation:
     excludes:
         - '**/spec/**'
         - '**/examples/**'
-        - '**/dist/*.min.js'
     embed-source: false
     variable: __coverage__
     compact: true

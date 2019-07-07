@@ -4,6 +4,6 @@ engines:
 
 ratings:
   paths:
-  - "dist/handlebars-helpers-underscore.string.js"
+  - "dist/*.js"
 
 exclude_paths: []
